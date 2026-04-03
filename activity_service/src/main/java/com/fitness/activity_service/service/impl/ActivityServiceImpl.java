@@ -4,7 +4,7 @@ import com.fitness.activity_service.dto.ActivityRequest;
 import com.fitness.activity_service.dto.ActivityResponse;
 import com.fitness.activity_service.model.Activity;
 import com.fitness.activity_service.service.ActivityService;
-import com.fitness.activity_service.service.repository.ActivityRepository;
+import com.fitness.activity_service.repository.ActivityRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +14,15 @@ public class ActivityServiceImpl implements ActivityService {
 
     private final ActivityRepository activityRepository;
 
+    private final UserValidationService userValidationService;
+
     @Override
     public ActivityResponse trackActivity(ActivityRequest activityRequest) {
+        boolean isValidUser = userValidationService.validateUser(activityRequest.getUserId());
+        if (!isValidUser) {
+            throw new RuntimeException("Invalid User : " + activityRequest.getUserId());
+        }
+
         Activity activity = Activity.builder()
                 .userId(activityRequest.getUserId())
                 .caloriesBurned(activityRequest.getCaloriesBurned())
