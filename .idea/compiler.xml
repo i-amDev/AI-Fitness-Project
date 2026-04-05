@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="eureka_server" />
         <module name="config_server" />
+        <module name="api_gateway" />
       </profile>
       <profile name="Annotation profile for ai_service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -27,6 +28,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="activity_service" options="-parameters" />
       <module name="ai_service" options="-parameters" />
+      <module name="api_gateway" options="-parameters" />
       <module name="config_server" options="-parameters" />
       <module name="eureka_server" options="-parameters" />
       <module name="user_service" options="-parameters" />
